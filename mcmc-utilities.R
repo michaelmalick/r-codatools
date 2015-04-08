@@ -21,7 +21,7 @@ mcmc_df <- function(
     
     # coda.object = an mcmc.list object from the coda package
     # parms = character vector of parameter names
-
+    #
     # This function takes as input an mcmc.list object from the coda package and
     # outputs a data frame with a column for each parameter and two indicator
     # columns, one giving the chain number, and another giving the iteration
@@ -85,10 +85,7 @@ mcmc_table <- function(
     
     # coda.object = an mcmc.list object from the coda package
     # parms = character vector of parameter names
-    # grep = pattern to match in parameter vector
-    # plot = logical, should parameter values and CIs be plotted
-    # ... = additional arguments to the 'grepl' function
-
+    #
     # This function takes as input an mcmc.list object from the coda package and
     # outputs a dataframe giving the median for each parameter estimate along
     # with the 2.5% and 97.5% credibility intervals. 
@@ -309,7 +306,7 @@ post_dotplot <- function(
 
     # coda.object = an mcmc.list object from the coda package
     # parms = character vector of parameter names
-
+    #
     # This function plots the median value for each parameter specified by the
     # parms arguement as a dot and the 80% credibility interval is shown as a
     # thick horizontal line and the 95% credibility interval is shown as a thin
@@ -395,7 +392,7 @@ post_histogram <- function(
     
     # coda.object = an mcmc.list object from the coda package
     # parms = character vector of parameter names
-
+    #
     # This function plots a histogram of the marginal posterior distribution for
     # each parameter specified by the parms argument. In addition, a density
     # overlay, rug of mcmc sample values, median value (bold vertical dash), and
