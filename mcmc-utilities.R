@@ -262,7 +262,7 @@ mcmc_diag <- function(
         axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
         abline(h = 1, col = "grey50", lwd = 1)
         box(col = "grey50")
-        xx <- gelman.diag(line)
+        xx <- gelman.diag(coda.object)
         xx <- round(xx$psrf[1, i], 3)
         txt <- paste("Rhat =", xx)
         mtext(txt, side = 3, cex = 0.7)
