@@ -369,10 +369,10 @@ if(FALSE){
 
 
 # ----------------------------
-# post_dotplot()
+# mcmc_dotplot()
 # ----------------------------
 # {{{
-post_dotplot <- function(
+mcmc_dotplot <- function(
     coda.object,
     parms = NULL) {
 
@@ -432,17 +432,17 @@ if(FALSE){
     library(coda)
     data(line)
 
-    post_dotplot(line)
+    mcmc_dotplot(line)
 
-    post_dotplot(line, parms = "alpha")
+    mcmc_dotplot(line, parms = "alpha")
 
-    post_dotplot(line, parms = c("alpha", "beta"))
+    mcmc_dotplot(line, parms = c("alpha", "beta"))
 
-    post_dotplot(line, parms = grep("sig", varnames(line), value = TRUE))
+    mcmc_dotplot(line, parms = grep("sig", varnames(line), value = TRUE))
 
-    post_dotplot(line, parms = grep("a", varnames(line), value = TRUE))
+    mcmc_dotplot(line, parms = grep("a", varnames(line), value = TRUE))
 
-    post_dotplot(line, parms = c("alpha", grep("sig", varnames(line), 
+    mcmc_dotplot(line, parms = c("alpha", grep("sig", varnames(line), 
                  value = TRUE)))
 
 }
@@ -455,10 +455,10 @@ if(FALSE){
 
 
 # ----------------------------
-# post_histogram()
+# pos_histogram()
 # ----------------------------
 # {{{
-post_histogram <- function(
+mcmc_histogram <- function(
     coda.object,
     parms = NULL) {
     
@@ -516,17 +516,17 @@ if(FALSE){
     library(coda)
     data(line)
 
-    post_histogram(line)
+    mcmc_histogram(line)
 
-    post_histogram(line, parms = "alpha")
+    mcmc_histogram(line, parms = "alpha")
 
-    post_histogram(line, parms = c("alpha", "beta"))
+    mcmc_histogram(line, parms = c("alpha", "beta"))
 
-    post_histogram(line, parms = grep("sig", varnames(line), value = TRUE))
+    mcmc_histogram(line, parms = grep("sig", varnames(line), value = TRUE))
 
-    post_histogram(line, parms = grep("a", varnames(line), value = TRUE))
+    mcmc_histogram(line, parms = grep("a", varnames(line), value = TRUE))
 
-    post_histogram(line, parms = c("alpha", grep("sig", varnames(line), 
+    mcmc_histogram(line, parms = c("alpha", grep("sig", varnames(line), 
                  value = TRUE)))
 
 }
