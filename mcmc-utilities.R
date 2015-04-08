@@ -171,7 +171,7 @@ mcmc_diag <- function(
     pal <- hcl(h = ang, c = 100, l = 60, fixup = TRUE)
 
     n.parms <- length(parms)
-    par(mfrow = c(2, 2), mar = c(4,4.5,3,0), oma = c(1,0,0,1))
+    par(mfrow = c(3, 2), mar = c(4,4.5,3,0), oma = c(1,0,0,1))
 
     for(i in 1:n.parms) {
 
@@ -214,14 +214,14 @@ mcmc_diag <- function(
         axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
         axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
 
-        med <- apply(sim.mat, 2, median)
-        abline(v = med, col = pal, lty = 2)
+        # med <- apply(sim.mat, 2, median)
+        # abline(v = med, col = pal, lty = 2)
 
-        conf <- t(apply(sim.mat, 2, quantile, probs = c(0.025, 0.975)))
-        segments(y0 = -1, y1 = max(dens.y) * 0.01, x0 = conf[ , 1], 
-            x1 = conf[ , 1], col = pal)
-        segments(y0 = -1, y1 = max(dens.y) * 0.01, x0 = conf[ , 2], 
-            x1 = conf[ , 2], col = pal)
+        # conf <- t(apply(sim.mat, 2, quantile, probs = c(0.025, 0.975)))
+        # segments(y0 = -1, y1 = max(dens.y) * 0.01, x0 = conf[ , 1], 
+        #     x1 = conf[ , 1], col = pal)
+        # segments(y0 = -1, y1 = max(dens.y) * 0.01, x0 = conf[ , 2], 
+        #     x1 = conf[ , 2], col = pal)
 
 
         ## Autocorrelation plot
@@ -262,6 +262,76 @@ mcmc_diag <- function(
         axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
         abline(h = 1, col = "grey50", lwd = 1)
         box(col = "grey50")
+        xx <- gelman.diag(line)
+        xx <- round(xx$psrf[1, i], 3)
+        txt <- paste("Rhat =", xx)
+        mtext(txt, side = 3, cex = 0.7)
+        
+        ## Cumulative Quantiles
+        n.iter <- dim(sim.mat)[1]
+        probs <- c(0.025, 0.50, 0.975)
+        cum.arr <- array(NA, dim = c(n.iter, length(probs), n.chains))
+        for(j in 1:n.chains) {
+            for(k in 1:n.iter) 
+                cum.arr[k , , j] <- quantile(sim.mat[1:k, j], probs = probs)
+        }
+
+        for(j in 1:n.chains) {
+
+            if(j > 1)
+                add <- TRUE
+            else
+                add <- FALSE
+
+            matplot(as.vector(time(coda.object)), cum.arr[ , , j],
+                type = "l",
+                lwd = c(1, 2, 1),
+                # cex  = 0.7,
+                ylim = c(min(cum.arr), max(cum.arr)),
+                lty  = c(2, 1, 2),
+                col  = pal[j],
+                ylab = "Median",
+                xlab = "Iteration",
+                add  = add,
+                axes = FALSE)
+
+            if(j == 1) {
+                box(col = "grey50")
+                axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
+                axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
+            }
+        }
+
+        ## Histogram
+
+        dat.hist <- sim.dat[ , i]
+        dens <- density(dat.hist)
+        y.min <- min(dens$y)
+        y.max <- max(dens$y)
+        x.min <- min(dens$x)
+        x.max <- max(dens$x)
+
+        hist(dat.hist,
+            freq = FALSE,
+            col = "grey60",
+            border = "white",
+            ylab = "Density",
+            xlab = "Value",
+            main = "",
+            ylim = c(y.min, y.max),
+            xlim = c(x.min, x.max),
+            axes = FALSE)
+        box(col = "grey50")
+        axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
+        axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
+        lines(dens, col = "grey30")
+        rug(dat.hist, col = "grey75")
+        segments( y0 = 0, y1 = 0, 
+            x0 = quantile(dat.hist, probs = c(0.025, 0.975))[1],
+            x1 = quantile(dat.hist, probs = c(0.025, 0.975))[2],
+            lwd = 3, col = "tomato", lend = 2)
+        points(x = median(dat.hist), y = 0, pch = "|", cex = 3, 
+            col = "steelblue")
 
 
         ## Title
@@ -274,10 +344,12 @@ if(FALSE){
 
     library(coda)
     data(line)
-
+    
     mcmc_diag(line)
 
     mcmc_diag(line, parms = "alpha")
+
+    mcmc_diag(line, parms = "beta")
 
     mcmc_diag(line, parms = c("alpha", "beta"))
 
