@@ -263,7 +263,7 @@ mcmc_diag <- function(
         abline(h = 1, col = "grey50", lwd = 1)
         box(col = "grey50")
         xx <- gelman.diag(coda.object)
-        xx <- round(xx$psrf[1, i], 3)
+        xx <- round(xx$psrf[i, 1], 3)
         txt <- paste("Rhat =", xx)
         mtext(txt, side = 3, cex = 0.7)
         
@@ -332,6 +332,8 @@ mcmc_diag <- function(
             lwd = 3, col = "tomato", lend = 2)
         points(x = median(dat.hist), y = 0, pch = "|", cex = 3, 
             col = "steelblue")
+        txt <- paste("median =", round(median(dat.hist), 3))
+        mtext(txt, side = 3, cex = 0.7)
 
 
         ## Title
