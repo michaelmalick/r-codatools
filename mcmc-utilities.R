@@ -1,14 +1,14 @@
 # mcmc-utilities
 # Michael Malick
-# 07 Apr 2015
+# 08 Apr 2015
 #
 #
 # Functions:
 #   - mcmc_df()
 #   - mcmc_table()
 #   - mcmc_diag()
-#   - post_dotplot()
-#   - post_histogram()
+#   - mcmc_dotplot()
+#   - mcmc_histogram()
 
 
 # ----------------------------
@@ -455,7 +455,7 @@ if(FALSE){
 
 
 # ----------------------------
-# pos_histogram()
+# mcmc_histogram()
 # ----------------------------
 # {{{
 mcmc_histogram <- function(
