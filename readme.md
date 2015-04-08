@@ -15,14 +15,14 @@ informative visualizations of MCMC chains and posterior distributions.
 `mcmc-utilities` is currently not an R package, but can be installed in a number
 of ways:
 
-1. Using `devtools`
+Using `devtools`:
 
     install.packages("devtools")
     library(devtools)
     source_url("https://raw.githubusercontent.com/MichaelMalick/r-mcmc-utilities/master/mcmc-utilities.R")
 
 
-2. Using `wget`
+Using `wget`:
 
     source(pipe(paste("wget -O -", "https://raw.githubusercontent.com/MichaelMalick/r-mcmc-utilities/master/mcmc-utilities.R")))
 
