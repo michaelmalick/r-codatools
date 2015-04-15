@@ -114,15 +114,6 @@ coda_diag <- function(
         axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
         axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
 
-        # med <- apply(sim.mat, 2, median)
-        # abline(v = med, col = pal, lty = 2)
-
-        # conf <- t(apply(sim.mat, 2, quantile, probs = c(0.025, 0.975)))
-        # segments(y0 = -1, y1 = max(dens.y) * 0.01, x0 = conf[ , 1], 
-        #     x1 = conf[ , 1], col = pal)
-        # segments(y0 = -1, y1 = max(dens.y) * 0.01, x0 = conf[ , 2], 
-        #     x1 = conf[ , 2], col = pal)
-
 
         ## Autocorrelation plot
         acor   <- apply(sim.mat, 2, acf, plot = FALSE)
@@ -203,24 +194,23 @@ coda_diag <- function(
         }
 
         ## Histogram
-
         dat.hist <- sim.dat[ , i]
-        dens <- density(dat.hist)
-        y.min <- min(dens$y)
-        y.max <- max(dens$y)
-        x.min <- min(dens$x)
-        x.max <- max(dens$x)
+        dens     <- density(dat.hist)
+        y.min    <- min(dens$y)
+        y.max    <- max(dens$y)
+        x.min    <- min(dens$x)
+        x.max    <- max(dens$x)
 
         hist(dat.hist,
-            freq = FALSE,
-            col = "grey60",
+            freq   = FALSE,
+            col    = "grey60",
             border = "white",
-            ylab = "Density",
-            xlab = "Value",
-            main = "",
-            ylim = c(y.min, y.max),
-            xlim = c(x.min, x.max),
-            axes = FALSE)
+            ylab   = "Density",
+            xlab   = "Value",
+            main   = "",
+            ylim   = c(y.min, y.max),
+            xlim   = c(x.min, x.max),
+            axes   = FALSE)
         box(col = "grey50")
         axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
         axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
@@ -234,7 +224,6 @@ coda_diag <- function(
             col = "steelblue")
         txt <- paste("median =", round(median(dat.hist), 3))
         mtext(txt, side = 3, cex = 0.7)
-
 
         ## Title
         mtext(parms[i], outer = TRUE, line = -1.5, font = 2)
