@@ -3,5 +3,6 @@
 export(coda_df)
 export(coda_diag)
 export(coda_dotplot)
+export(coda_grep)
 export(coda_histogram)
 export(coda_table)
