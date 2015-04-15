@@ -13,7 +13,7 @@ coda_diag(coda.object, parameters = NULL)
      none are supplied all monitored parameters are included.}
 }
 \value{
-a graphic with six diagnostic plots:
+A graphic with six diagnostic plots:
 
     \itemize{
         \item{traceplot of all chains}

@@ -14,7 +14,7 @@
 #'      supplied all monitored parameters are included.
 #'
 #' @return
-#'      a dataframe
+#'      A dataframe
 #'
 #' @seealso \code{\link{data.frame}} \code{\link{mcmc}} \code{\link{mcmc.list}}
 #' 

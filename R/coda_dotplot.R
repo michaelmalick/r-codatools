@@ -4,21 +4,21 @@
 #' @description
 #'      \code{coda_dotplot} creates a single dotplot of the specified parameters
 #'      (or all parameters if none are specified) with the dots giving the
-#'      median value over all mcmc chains and horizontal bars giving the 80%
-#'      credibility interval (thick bars) and the 95% credibility intervals
+#'      median value over all mcmc chains and horizontal bars giving the 80\%
+#'      credibility interval (thick bars) and the 95\% credibility intervals
 #'      (thin bars). This type of plot is also known as a catepillar plot and
 #'      provides a way to easily summarize many parameters in a hierarchical
 #'      model.
 #'
 #' @param coda.object
-#'      an mcmc.list object
+#'      An mcmc.list object
 #'  
 #' @param parameters
 #'      character vector of parameter names to include in graphic. If none are
 #'      supplied all monitored parameters are included.
 #'
 #' @return
-#'      a graphics device
+#'      A graphics device
 #'
 #' @export
 #'

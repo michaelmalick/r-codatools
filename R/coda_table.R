@@ -4,7 +4,7 @@
 #'      \code{coda_table} takes as input an mcmc.list object from the coda
 #'      package and outputs a dataframe giving the mean, standard
 #'      deviation, and median for each parameter estimate along with quantiles
-#'      for 95% and 80% credibility intervals.
+#'      for 95\% and 80\% credibility intervals.
 #'
 #' @param coda.object
 #'      an mcmc.list object
@@ -14,7 +14,7 @@
 #'      supplied all monitored parameters are included.
 #'
 #' @return
-#'      a dataframe
+#'      A dataframe
 #'
 #' @seealso \code{\link{coda_df}} 
 #'

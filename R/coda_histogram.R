@@ -4,19 +4,19 @@
 #'      \code{coda_histogram} plots a histogram of the marginal posterior
 #'      distribution for each parameter specified by the parameters argument. 
 #'      In addition, a density overlay, rug of mcmc sample values, median value
-#'      (bold vertical dash), and 95% credibility interval (bold horizontal line)
-#'      are plotted. The function uses lattice to panel the histograms for each
-#'      parameter.
+#'      (bold vertical dash), and 95\% credibility interval (bold horizontal
+#'      line) are plotted. The function uses lattice to panel the histograms for
+#'      each parameter.
 #'
 #' @param coda.object
-#'      an mcmc.list object
+#'      An mcmc.list object
 #'  
 #' @param parameters
 #'      character vector of parameter names to include in graphic. If none are
 #'      supplied all monitored parameters are included.
 #'
 #' @return
-#'      a graphics device
+#'      A graphics device
 #'
 #' @export
 #'

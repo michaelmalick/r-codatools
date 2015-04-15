@@ -13,7 +13,7 @@ coda_df(coda.object, parameters = NULL)
      supplied all monitored parameters are included.}
 }
 \value{
-a dataframe
+A dataframe
 }
 \description{
 \code{coda_df} takes as input an mcmc.list object and converts it to a

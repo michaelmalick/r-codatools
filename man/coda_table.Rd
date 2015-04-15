@@ -13,13 +13,13 @@ coda_table(coda.object, parameters = NULL)
      supplied all monitored parameters are included.}
 }
 \value{
-a dataframe
+A dataframe
 }
 \description{
 \code{coda_table} takes as input an mcmc.list object from the coda
      package and outputs a dataframe giving the mean, standard
      deviation, and median for each parameter estimate along with quantiles
-     for 95% and 80% credibility intervals.
+     for 95\% and 80\% credibility intervals.
 }
 \examples{
 library(coda)
