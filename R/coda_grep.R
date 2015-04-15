@@ -50,6 +50,11 @@ coda_grep <- function(
     return.matrix = FALSE,
     ...) {
 
+    require(coda)
+
+    if (!is.mcmc(coda.object) && !is.mcmc.list(coda.object)) 
+        stop("Not an mcmc or mcmc.list object")
+
     params <- grep(pattern, coda::varnames(coda.object), value = TRUE, ...)
     out    <- coda.object[ , params]
 
