@@ -1,0 +1,14 @@
+Package: codatools
+Type: Package
+Title: codatools
+Version: 0.1
+Date: 2015-15-04
+Author: Michael Malick
+Maintainer: Michael Malick <malickmj@gmail.com>
+Depends:
+    R (>= 3.0)
+Imports:
+    coda,
+    lattice
+Description: NA
+License: MIT

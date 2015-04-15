@@ -1,9 +1,9 @@
-# mcmc-utilities
-A collection of R functions to extend the usefulness of coda MCMC diagnostics
+# codatools
+*An R package to extend the usefulness of CODA MCMC diagnostics*
 
 
 # Overview
-`mcmc-utilities` is a collection of R functions to diagnose MCMC chain
+`codatools` is a collection of R functions to diagnose MCMC chain
 convergence and to visualize and summarize posterior distributions. All
 functions expect an `mcmc` or `mcmc.list` objects from the coda package as
 input. The functions do not extend the functionality provided by the coda
@@ -12,22 +12,15 @@ informative visualizations of MCMC chains and posterior distributions.
 
 
 # Installation
-`mcmc-utilities` is currently not an R package, but can be installed in a number
-of ways:
-
-Using `devtools`:
+The `codatools` package is not on CRAN, but can be installed from R using:
 
     install.packages("devtools")
     library(devtools)
-    source_url("https://raw.githubusercontent.com/MichaelMalick/r-mcmc-utilities/master/mcmc-utilities.R")
-
-
-Using `wget`:
-
-    source(pipe(paste("wget -O -", "https://raw.githubusercontent.com/MichaelMalick/r-mcmc-utilities/master/mcmc-utilities.R")))
+    install_github(repo = "michaelmalick/r-codatools")
+    library(codatools)
 
 
 # License 
-The `mcmc-utilities` functions are [MIT/X11](http://opensource.org/licenses/MIT)
+The `codatools` package is [MIT/X11](http://opensource.org/licenses/MIT)
 licensed. Copyright (c) 2015 Michael Malick
 
