@@ -14,7 +14,7 @@ coda_grep(coda.object, pattern, return.matrix = FALSE, ...)
 \item{return.matrix}{should the mcmc.list object be returned as a single matrix. If TRUE,
      each element of the mcmc.list is binded together using rbind.}
 
-\item{\ldots}{additional arguments for \code{\link{grep}}}
+\item{\dots}{additional arguments for \code{\link{grep}}}
 }
 \value{
 An mcmc, mcmc.list or matrix

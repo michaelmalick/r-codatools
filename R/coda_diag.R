@@ -89,8 +89,8 @@ coda_diag <- function(
                          sep = ""),
             axes = FALSE)
         box(col = "grey50")
-        axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
-        axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
+        axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
+        axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
         txt <- paste("niter =", coda::niter(coda.object), "   nchain =",
             coda::nchain(coda.object))
         mtext(txt, side = 3, cex = 0.7)
@@ -111,8 +111,8 @@ coda_diag <- function(
             xlab = "Value",
             axes = FALSE)
         box(col = "grey50")
-        axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
-        axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
+        axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
+        axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
 
 
         ## Autocorrelation plot
@@ -132,8 +132,8 @@ coda_diag <- function(
             xlab = "Lag",
             axes = FALSE)
         box(col = "grey50")
-        axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
-        axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
+        axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
+        axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
         abline(h = 0, col = "grey50", lty = 2)
         ess <- coda::effectiveSize(coda.object)[parms[i]]
         text(x = max(acor.x), y = max(acor.y),
@@ -149,11 +149,11 @@ coda_diag <- function(
             lwd  = c(2, 1),
             axes = FALSE,
             auto.layout = FALSE)
-        axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
-        axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
+        axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
+        axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
         abline(h = 1, col = "grey50", lwd = 1)
         box(col = "grey50")
-        xx <- gelman.diag(coda.object)
+        xx <- coda::gelman.diag(coda.object)
         xx <- round(xx$psrf[i, 1], 3)
         txt <- paste("Rhat =", xx)
         mtext(txt, side = 3, cex = 0.7)
@@ -188,8 +188,8 @@ coda_diag <- function(
 
             if(j == 1) {
                 box(col = "grey50")
-                axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
-                axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
+                axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
+                axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
             }
         }
 
@@ -212,8 +212,8 @@ coda_diag <- function(
             xlim   = c(x.min, x.max),
             axes   = FALSE)
         box(col = "grey50")
-        axis(1, lwd = 0, col = "grey50", lwd.tick = 1)
-        axis(2, lwd = 0, col = "grey50", las = 1, lwd.tick = 1)
+        axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
+        axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
         lines(dens, col = "grey30")
         rug(dat.hist, col = "grey75")
         segments( y0 = 0, y1 = 0, 

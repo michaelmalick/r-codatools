@@ -16,7 +16,7 @@
 #' @param main
 #'      main title for graphic
 #'
-#' @param \ldots
+#' @param \dots
 #'      additional argurments passed to \code{density}
 #'
 #' @return
@@ -79,8 +79,8 @@ colDensity <- function(x, xlim = NULL, xlab = "", main = "", ...) {
         ylab = "Density",
         xlab = xlab,
         axes = FALSE)
-    axis(2, lwd = 1, lwd.tick = 1, las = 1, col = "grey50")
-    axis(1, lwd = 1, lwd.tick = 1, col = "grey50")
+    axis(2, lwd = 1, lwd.ticks = 1, las = 1, col = "grey50")
+    axis(1, lwd = 1, lwd.ticks = 1, col = "grey50")
     box(col = "grey50")
 
     invisible(list(x = x.dens, y = y.dens))

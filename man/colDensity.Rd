@@ -15,7 +15,7 @@ colDensity(x, xlim = NULL, xlab = "", main = "", ...)
 
 \item{main}{main title for graphic}
 
-\item{\ldots}{additional argurments passed to \code{density}}
+\item{\dots}{additional argurments passed to \code{density}}
 }
 \value{
 Invisibly returns a list with x and y components for the plotted density

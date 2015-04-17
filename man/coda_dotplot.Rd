@@ -2,7 +2,7 @@
 % Please edit documentation in R/coda_dotplot.R
 \name{coda_dotplot}
 \alias{coda_dotplot}
-\title{Create a dotplot of median parameter values with 95% credibility
+\title{Create a dotplot of median parameter values with 95\% credibility
        intervals}
 \usage{
 coda_dotplot(coda.object, parameters = NULL)

@@ -1,4 +1,4 @@
-#' @title Create a dotplot of median parameter values with 95% credibility
+#' @title Create a dotplot of median parameter values with 95\% credibility
 #'        intervals
 #'
 #' @description
@@ -47,7 +47,6 @@ coda_dotplot <- function(
     coda.object,
     parameters = NULL) {
     
-    require(lattice)
     parm.p <- coda_table(coda.object, parameters = parameters)
 
     fun.par <- list(
@@ -64,7 +63,7 @@ coda_dotplot <- function(
     xmin <- xmin - abs(xmax*0.03)
     xmax <- xmax + abs(xmax*0.03)
 
-    l <- xyplot(as.factor(row.names(parm.p)) ~ parm.p$median,
+    l <- lattice::xyplot(as.factor(row.names(parm.p)) ~ parm.p$median,
         pch  = 19,
         cex  = 1.0,
         col  = "steelblue",
@@ -74,13 +73,13 @@ coda_dotplot <- function(
         par.settings = fun.par,
         scales = list(tck = c(1, 0)),
         panel = function(x, y, ...) {
-            panel.segments(y0 = 1:dim(parm.p)[1], y1 = 1:dim(parm.p)[1],
+            lattice::panel.segments(y0 = 1:dim(parm.p)[1], y1 = 1:dim(parm.p)[1],
                 x0 = parm.p$"2.5%", x1 = parm.p$"97.5%", col = "steelblue",
                 lwd = 1)
-            panel.segments(y0 = 1:dim(parm.p)[1], y1 = 1:dim(parm.p)[1],
+            lattice::panel.segments(y0 = 1:dim(parm.p)[1], y1 = 1:dim(parm.p)[1],
                 x0 = parm.p$"10%", x1 = parm.p$"90%", col = "steelblue",
                 lwd = 2.5)
-            panel.xyplot(x, y, ...)
+            lattice::panel.xyplot(x, y, ...)
         })
 
     print(l)

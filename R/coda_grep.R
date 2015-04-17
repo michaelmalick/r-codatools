@@ -14,7 +14,7 @@
 #'      should the mcmc.list object be returned as a single matrix. If TRUE,
 #'      each element of the mcmc.list is binded together using rbind.
 #'  
-#' @param \ldots
+#' @param \dots
 #'      additional arguments for \code{\link{grep}}
 #'  
 #' @return
@@ -50,9 +50,7 @@ coda_grep <- function(
     return.matrix = FALSE,
     ...) {
 
-    require(coda)
-
-    if (!is.mcmc(coda.object) && !is.mcmc.list(coda.object)) 
+    if (!coda::is.mcmc(coda.object) && !coda::is.mcmc.list(coda.object)) 
         stop("Not an mcmc or mcmc.list object")
 
     params <- grep(pattern, coda::varnames(coda.object), value = TRUE, ...)

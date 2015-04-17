@@ -45,8 +45,6 @@ coda_histogram <- function(
     coda.object,
     parameters = NULL) {
 
-    require(lattice)
-    
     dat   <- coda_df(coda.object, parameters = parameters)
     dat.l <- reshape(dat, direction = "long",
         varying = 3:dim(dat)[2],
@@ -64,7 +62,7 @@ coda_histogram <- function(
         axis.text        = list(col = "grey30"),
         reference.line   = list(col = "grey85"))
 
-    l <- densityplot( ~ value | parm, data = dat.l, 
+    l <- lattice::densityplot( ~ value | parm, data = dat.l, 
         scales   = list(relation = "free"),
         col      = "grey30",
         pch      = "",
@@ -72,16 +70,16 @@ coda_histogram <- function(
         as.table = TRUE,
         par.settings = fun.par,
         panel = function(x, ...) {
-            panel.histogram(x, pch = "", col = "grey60", border = "white",
-                type = "density", breaks = NULL)
-            panel.rug(x, col = "grey60")
-            panel.segments( y0 = 0, y1 = 0, 
+            lattice::panel.histogram(x, pch = "", col = "grey60", 
+                border = "white", type = "density", breaks = NULL)
+            lattice::panel.rug(x, col = "grey60")
+            lattice::panel.segments( y0 = 0, y1 = 0, 
                 x0 = quantile(x, probs = c(0.025, 0.975))[1],
                 x1 = quantile(x, probs = c(0.025, 0.975))[2],
                 lwd = 3, col = "tomato", lend = 2)
-            panel.points(x = median(x), y = 0, pch = "|", cex = 3, 
+            lattice::panel.points(x = median(x), y = 0, pch = "|", cex = 3, 
                 col = "steelblue")
-            panel.densityplot(x, ...)
+            lattice::panel.densityplot(x, ...)
         })
     print(l)
 }
