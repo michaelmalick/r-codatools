@@ -62,7 +62,10 @@ coda_histogram <- function(
         axis.text        = list(col = "grey30"),
         reference.line   = list(col = "grey85"))
 
-    l <- lattice::densityplot( ~ value | parm, data = dat.l, 
+    dat.l$parm <- factor(dat.l$parm, levels = unique(dat.l$parm))
+
+    l <- lattice::densityplot( ~ value | parm, 
+        data = dat.l, 
         scales   = list(relation = "free"),
         col      = "grey30",
         pch      = "",

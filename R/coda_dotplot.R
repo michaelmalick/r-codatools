@@ -63,7 +63,8 @@ coda_dotplot <- function(
     xmin <- xmin - abs(xmax*0.03)
     xmax <- xmax + abs(xmax*0.03)
 
-    l <- lattice::xyplot(as.factor(row.names(parm.p)) ~ parm.p$median,
+    l <- lattice::xyplot(
+        factor(row.names(parm.p), levels = row.names(parm.p)) ~ parm.p$median,
         pch  = 19,
         cex  = 1.0,
         col  = "steelblue",
