@@ -13,26 +13,20 @@ coda_diag(coda.object, parameters = NULL)
      none are supplied all monitored parameters are included.}
 }
 \value{
-A graphic with six diagnostic plots:
+A graphic with three diagnostic plots:
 
     \itemize{
         \item{traceplot of all chains}
         \item{density plot of marginal distribution for each chain}
         \item{autocorrelation for each chain with effective sample size
               (ess)}
-        \item{evolution of the Gelman-Rubin statistic with 97.5\% credibility
-              interval}
-        \item{evolution of the median value for the parameter with 95\%
-              credibility interval}
-        \item{histogram of the marginal distribution of all chains
-              combined with median value and 95\% credibility interval}
      }
 }
 \description{
-\code{coda_diag} creates a graphic that includes six diagnostic plots to
-     help monitor convergence of an MCMC chain for a parameter. By default
+\code{coda_diag} creates a graphic that includes three diagnostic plots
+     to help monitor convergence of an MCMC chain for a parameter. By default
      the function will loop through all parameters in an mcmc.list object and
-     create a single graphic of six diagnostic plots for each parameter.
+     create a single graphic of three diagnostic plots for each parameter.
 }
 \examples{
 library(coda)
@@ -58,6 +52,5 @@ Michael Malick
 }
 \seealso{
 \code{\link{traceplot}} \code{\link{density}}
-         \code{\link{gelman.plot}} \code{\link{cumuplot}} \code{\link{hist}}
 }
 
