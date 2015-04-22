@@ -55,8 +55,8 @@ coda_table <- function(
         median = apply(as.matrix(sim.dat), 2, median),
         p.conf = apply(as.matrix(sim.dat), 2, quantile,
                        probs = c(0.025, 0.1, 0.9, 0.975)),
-        # n.iter = rep(coda::nchain(coda.object) * coda::niter(coda.object), 
-        #              n.parms),
+        n.iter = rep(coda::nchain(coda.object) * coda::niter(coda.object), 
+                     n.parms),
         n.eff  = coda::effectiveSize(coda.object)[parms],
         Rhat   = as.vector(coda::gelman.diag(coda.object)$psrf[,1][parms]))
     out <- do.call("rbind", ll)
