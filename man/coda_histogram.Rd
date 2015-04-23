@@ -16,7 +16,8 @@ coda_histogram(coda.object, parameters = NULL)
 A graphics device
 }
 \description{
-\code{coda_histogram} plots a histogram of the marginal posterior
+\code{coda_histogram} uses the \code{histogram} function in the lattice
+     package to plot histograms of the marginal posterior
      distribution for each parameter specified by the parameters argument.
      In addition, a density overlay, rug of mcmc sample values, median value
      (bold vertical dash), and 95\% credibility interval (bold horizontal
