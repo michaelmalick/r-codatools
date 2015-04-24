@@ -74,6 +74,7 @@ coda_dotplot <- function(
         par.settings = fun.par,
         scales = list(tck = c(1, 0)),
         panel = function(x, y, ...) {
+            lattice::panel.abline(v = 0, col = "grey60", lty = 2)
             lattice::panel.segments(y0 = 1:dim(parm.p)[1], y1 = 1:dim(parm.p)[1],
                 x0 = parm.p$"2.5%", x1 = parm.p$"97.5%", col = "steelblue",
                 lwd = 1)
