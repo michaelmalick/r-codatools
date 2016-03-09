@@ -63,6 +63,7 @@ coda_diag <- function(
     ang <- seq(0, 240, length.out = n.chains)
     pal <- hcl(h = ang, c = 100, l = 60, fixup = TRUE)
 
+    def.par <- par(no.readonly = TRUE)
     n.parms <- length(parms)
     par(mar = c(4,4.5,3,0), oma = c(1,0,0,1))
     m <- rbind(
@@ -227,4 +228,5 @@ coda_diag <- function(
         ## Title
         mtext(parms[i], outer = TRUE, line = -1.5, font = 2)
     }
+    par(def.par)
 }
