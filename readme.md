@@ -20,7 +20,5 @@ The `codatools` package is not on CRAN, but can be installed from R using:
     library(codatools)
 
 
-# License 
-The `codatools` package is [MIT/X11](http://opensource.org/licenses/MIT)
-licensed. Copyright (c) 2015 Michael Malick
-
+# License
+MIT
