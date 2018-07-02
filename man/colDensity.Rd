@@ -4,7 +4,7 @@
 \alias{colDensity}
 \title{Plots non-parametric density overlays for each column in a matrix}
 \usage{
-colDensity(x, xlim = NULL, xlab = "", main = "", ...)
+colDensity(x, xlim = NULL, xlab = "", main = "", plot.it = TRUE, ...)
 }
 \arguments{
 \item{x}{a matrix}
@@ -14,6 +14,8 @@ colDensity(x, xlim = NULL, xlab = "", main = "", ...)
 \item{xlab}{x-axis label}
 
 \item{main}{main title for graphic}
+
+\item{plot.it}{logical, should a plot be created}
 
 \item{\dots}{additional argurments passed to \code{density}}
 }

@@ -16,6 +16,9 @@
 #' @param main
 #'      main title for graphic
 #'
+#' @param plot.it
+#'      logical, should a plot be created
+#'
 #' @param \dots
 #'      additional argurments passed to \code{density}
 #'
@@ -37,7 +40,7 @@
 #' xx <- colDensity(mat, xlim = c(-4, 3))
 #' class(xx)
 #'
-colDensity <- function(x, xlim = NULL, xlab = "", main = "", ...) {
+colDensity <- function(x, xlim = NULL, xlab = "", main = "", plot.it = TRUE, ...) {
 
     if (!is.matrix(x))
         stop("x is not a matrix")
@@ -69,19 +72,21 @@ colDensity <- function(x, xlim = NULL, xlab = "", main = "", ...) {
         xlim <- c(min(x.dens), max(x.dens))
 
     ## Create plot
-    graphics::matplot(x.dens, y.dens,
-                      type = "l",
-                      lty  = 1,
-                      xlim = xlim,
-                      ylim = c(min(y.dens), max(y.dens)),
-                      col  = pal,
-                      main = main,
-                      ylab = "Density",
-                      xlab = xlab,
-                      axes = FALSE)
-    graphics::axis(2, lwd = 1, lwd.ticks = 1, las = 1, col = "grey50")
-    graphics::axis(1, lwd = 1, lwd.ticks = 1, col = "grey50")
-    graphics::box(col = "grey50")
+    if(plot.it) {
+        graphics::matplot(x.dens, y.dens,
+                          type = "l",
+                          lty  = 1,
+                          xlim = xlim,
+                          ylim = c(min(y.dens), max(y.dens)),
+                          col  = pal,
+                          main = main,
+                          ylab = "Density",
+                          xlab = xlab,
+                          axes = FALSE)
+        graphics::axis(2, lwd = 1, lwd.ticks = 1, las = 1, col = "grey50")
+        graphics::axis(1, lwd = 1, lwd.ticks = 1, col = "grey50")
+        graphics::box(col = "grey50")
+    }
 
     invisible(list(x = x.dens, y = y.dens))
 }
