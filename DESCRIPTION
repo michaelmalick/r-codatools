@@ -10,5 +10,6 @@ Depends:
 Imports:
     coda,
     lattice
-Description: NA
-License: MIT
+Description: An R package to extend the usefulness of CODA MCMC diagnostics.
+License: file LICENSE
+RoxygenNote: 6.0.1

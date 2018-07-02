@@ -8,7 +8,7 @@
 #'
 #' @param coda.object
 #'      an mcmc.list object
-#'  
+#'
 #' @param parameters
 #'      character vector of parameter names to include in dataframe. If none are
 #'      supplied all monitored parameters are included.
@@ -17,7 +17,7 @@
 #'      A dataframe
 #'
 #' @seealso \code{\link{data.frame}} \code{\link{mcmc}} \code{\link{mcmc.list}}
-#' 
+#'
 #' @export
 #'
 #' @author Michael Malick
@@ -25,38 +25,38 @@
 #' @examples
 #' library(coda)
 #' data(line)
-#' 
+#'
 #' df <- coda_df(line)
 #' head(df)
 #' tail(df)
-#' 
+#'
 #' df <- coda_df(line, parameters = "alpha")
 #' head(df)
-#' 
+#'
 #' df <- coda_df(line, parameters = c("alpha", "beta"))
 #' head(df)
-#' 
+#'
 #' df <- coda_df(line, parameters = grep("sig", coda::varnames(line), value = TRUE))
 #' head(df)
-#' 
+#'
 #' df <- coda_df(line, parameters = grep("a", coda::varnames(line), value = TRUE))
 #' head(df)
-#' 
-#' df <- coda_df(line, parameters = c("alpha", grep("sig", coda::varnames(line), 
+#'
+#' df <- coda_df(line, parameters = c("alpha", grep("sig", coda::varnames(line),
 #'               value = TRUE)))
 #' head(df)
-#' 
+#'
 coda_df <- function(
-    coda.object, 
+    coda.object,
     parameters = NULL) {
 
-    if (!coda::is.mcmc(coda.object) && !coda::is.mcmc.list(coda.object)) 
+    if (!coda::is.mcmc(coda.object) && !coda::is.mcmc.list(coda.object))
         stop("Not an mcmc or mcmc.list object")
-   
+
     n.chain   <- coda::nchain(coda.object)
     mat       <- as.matrix(coda.object, iter = TRUE, chain = TRUE)
     df        <- as.data.frame(mat)
-    
+
     if(n.chain == 1)
         df <- data.frame(1, df)
 

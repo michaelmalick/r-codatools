@@ -8,9 +8,9 @@
 #'
 #' @param coda.object
 #'      an mcmc.list object
-#'  
+#'
 #' @param parameters
-#'      character vector of parameter names to create diagnostic plots for. If 
+#'      character vector of parameter names to create diagnostic plots for. If
 #'      none are supplied all monitored parameters are included.
 #'
 #' @return
@@ -19,12 +19,12 @@
 #'     \itemize{
 #'         \item{traceplot of all chains}
 #'         \item{density plot of marginal distribution for each chain}
-#'         \item{autocorrelation for each chain with effective sample size 
+#'         \item{autocorrelation for each chain with effective sample size
 #'               (ess)}
 #'      }
 #'
 #' @seealso \code{\link{traceplot}} \code{\link{density}}
-#' 
+#'
 #' @export
 #'
 #' @author Michael Malick
@@ -32,24 +32,24 @@
 #' @examples
 #' library(coda)
 #' data(line)
-#' 
+#'
 #' coda_diag(line)
-#' 
+#'
 #' coda_diag(line, parameters = "alpha")
-#' 
+#'
 #' coda_diag(line, parameters = "beta")
-#' 
+#'
 #' coda_diag(line, parameters = c("alpha", "beta"))
-#' 
+#'
 #' coda_diag(line, parameters = grep("sig", varnames(line), value = TRUE))
-#' 
+#'
 #' coda_diag(line, parameters = grep("a", varnames(line), value = TRUE))
-#' 
-#' coda_diag(line, parameters = c("alpha", grep("sig", varnames(line), 
+#'
+#' coda_diag(line, parameters = c("alpha", grep("sig", varnames(line),
 #'          value = TRUE)))
-#' 
+#'
 coda_diag <- function(
-    coda.object, 
+    coda.object,
     parameters = NULL) {
 
     n.chains      <- coda::nchain(coda.object)
@@ -61,15 +61,15 @@ coda_diag <- function(
 
     # Set color palette
     ang <- seq(0, 240, length.out = n.chains)
-    pal <- hcl(h = ang, c = 100, l = 60, fixup = TRUE)
+    pal <- grDevices::hcl(h = ang, c = 100, l = 60, fixup = TRUE)
 
-    def.par <- par(no.readonly = TRUE)
+    def.par <- graphics::par(no.readonly = TRUE)
     n.parms <- length(parms)
-    par(mar = c(4,4.5,3,0), oma = c(1,0,0,1))
+    graphics::par(mar = c(4,4.5,3,0), oma = c(1,0,0,1))
     m <- rbind(
         c(1,1),
         c(2, 3))
-    layout(m)
+    graphics::layout(m)
 
     for(i in 1:n.parms) {
 
@@ -78,68 +78,68 @@ coda_diag <- function(
         sim.mat <- matrix(unlist(sim.sp), ncol = n.chains, byrow = FALSE)
 
         ## Traceplot
-        matplot(as.vector(time(coda.object)), sim.mat, 
+        graphics::matplot(as.vector(stats::time(coda.object)), sim.mat,
             type = "l",
             lty  = 1,
             col  = pal,
             ylab = "Value",
-            xlab = paste("Iteration (thin = ", coda::thin(coda.object), ")", 
+            xlab = paste("Iteration (thin = ", coda::thin(coda.object), ")",
                          sep = ""),
             axes = FALSE)
-        box(col = "grey50")
-        axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
-        axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
+        graphics::box(col = "grey50")
+        graphics::axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
+        graphics::axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
         txt <- paste("niter =", coda::niter(coda.object), "   nchain =",
             coda::nchain(coda.object))
-        mtext(txt, side = 3, cex = 0.7)
+        graphics::mtext(txt, side = 3, cex = 0.7)
 
 
         ## Density plot
-        dens   <- apply(sim.mat, 2, density)
+        dens   <- apply(sim.mat, 2, stats::density)
         dens.x <- lapply(dens, function(x) x$x)
         dens.x <- do.call("cbind", dens.x)
         dens.y <- lapply(dens, function(x) x$y)
         dens.y <- do.call("cbind", dens.y)
 
-        matplot(dens.x, dens.y, 
-            type = "l",
-            lty  = 1,
-            col  = pal,
-            ylab = "Density",
-            xlab = "Value",
-            axes = FALSE)
-        box(col = "grey50")
-        axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
-        axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
+        graphics::matplot(dens.x, dens.y,
+                          type = "l",
+                          lty  = 1,
+                          col  = pal,
+                          ylab = "Density",
+                          xlab = "Value",
+                          axes = FALSE)
+        graphics::box(col = "grey50")
+        graphics::axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
+        graphics::axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
 
 
         ## Autocorrelation plot
-        acor   <- apply(sim.mat, 2, acf, plot = FALSE)
+        acor   <- apply(sim.mat, 2, stats::acf, plot = FALSE)
         acor.x <- lapply(acor, function(x) x$lag[ , , 1])
         acor.x <- do.call("cbind", acor.x)
         acor.y <- lapply(acor, function(x) x$acf[ , , 1])
         acor.y <- do.call("cbind", acor.y)
 
-        matplot(acor.x, acor.y, 
-            type = "o",
-            pch  = 19,
-            cex  = 0.7,
-            lty  = 1,
-            col  = pal,
-            ylab = "Autocorrelation",
-            xlab = "Lag",
-            axes = FALSE)
-        box(col = "grey50")
-        axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
-        axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
-        abline(h = 0, col = "grey50", lty = 2)
+        graphics::matplot(acor.x, acor.y,
+                          type = "o",
+                          pch  = 19,
+                          cex  = 0.7,
+                          lty  = 1,
+                          col  = pal,
+                          ylab = "Autocorrelation",
+                          xlab = "Lag",
+                          axes = FALSE)
+        graphics::box(col = "grey50")
+        graphics::axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
+        graphics::axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
+        graphics::abline(h = 0, col = "grey50", lty = 2)
         # ess <- coda::effectiveSize(coda.object)[parms[i]]
         # text(x = max(acor.x), y = max(acor.y),
         #     labels = paste("ESS =", round(ess, 1)), adj = c(1.25, 2.5))
 
 
         ## Gelman-Rubin Statistic
-        # gp <- coda::gelman.plot(coda.object[ , parms[i]], 
+        # gp <- coda::gelman.plot(coda.object[ , parms[i]],
         #     main = "",
         #     ylab = "Shrink factor",
         #     xlab = "Last iteration in chain",
@@ -154,8 +154,8 @@ coda_diag <- function(
         # xx <- coda::gelman.diag(coda.object)
         # xx <- round(xx$psrf[i, 1], 3)
         # txt <- paste("Rhat =", xx)
-        # mtext(txt, side = 3, cex = 0.7)
-        
+        # graphics::mtext(txt, side = 3, cex = 0.7)
+
 
 
         ## Cumulative Quantiles
@@ -163,7 +163,7 @@ coda_diag <- function(
         # probs <- c(0.025, 0.50, 0.975)
         # cum.arr <- array(NA, dim = c(n.iter, length(probs), n.chains))
         # for(j in 1:n.chains) {
-        #     for(k in 1:n.iter) 
+        #     for(k in 1:n.iter)
         #         cum.arr[k , , j] <- quantile(sim.mat[1:k, j], probs = probs)
         # }
 
@@ -216,17 +216,17 @@ coda_diag <- function(
         # axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
         # lines(dens, col = "grey30")
         # rug(dat.hist, col = "grey75")
-        # segments( y0 = 0, y1 = 0, 
+        # segments( y0 = 0, y1 = 0,
         #     x0 = quantile(dat.hist, probs = c(0.025, 0.975))[1],
         #     x1 = quantile(dat.hist, probs = c(0.025, 0.975))[2],
         #     lwd = 3, col = "tomato", lend = 2)
-        # points(x = median(dat.hist), y = 0, pch = "|", cex = 3, 
+        # points(x = median(dat.hist), y = 0, pch = "|", cex = 3,
         #     col = "steelblue")
         # txt <- paste("median =", round(median(dat.hist), 3))
-        # mtext(txt, side = 3, cex = 0.7)
+        # graphics::mtext(txt, side = 3, cex = 0.7)
 
         ## Title
-        mtext(parms[i], outer = TRUE, line = -1.5, font = 2)
+        graphics::mtext(parms[i], outer = TRUE, line = -1.5, font = 2)
     }
-    par(def.par)
+    graphics::par(def.par)
 }

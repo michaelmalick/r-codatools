@@ -6,13 +6,13 @@
 #'
 #' @param x
 #'      a matrix
-#'  
+#'
 #' @param xlim
 #'      vector of length 2 giving min and max for x-axis
 #'
 #' @param xlab
 #'      x-axis label
-#' 
+#'
 #' @param main
 #'      main title for graphic
 #'
@@ -23,7 +23,7 @@
 #'      Invisibly returns a list with x and y components for the plotted density
 #'      curves.
 #'
-#' @seealso \code{\link{density}} 
+#' @seealso \code{\link{density}}
 #'
 #' @export
 #'
@@ -36,13 +36,13 @@
 #' colDensity(mat, xlim = c(-4, 3))
 #' xx <- colDensity(mat, xlim = c(-4, 3))
 #' class(xx)
-#' 
+#'
 colDensity <- function(x, xlim = NULL, xlab = "", main = "", ...) {
 
     if (!is.matrix(x))
         stop("x is not a matrix")
 
-    n.rows <- dim(x)[2]
+    n.rows <- dim(x)[1]
     n.cols <- dim(x)[2]
     x.min  <- rep(NA, n.cols)
     x.max  <- rep(NA, n.cols)
@@ -54,7 +54,7 @@ colDensity <- function(x, xlim = NULL, xlab = "", main = "", ...) {
     x.dens <- vector("list", n.cols)
     y.dens <- vector("list", n.cols)
     for(i in 1:n.cols) {
-        dens[[i]]   <- density(x[ , i], ...)
+        dens[[i]]   <- stats::density(x[ , i], ...)
         x.dens[[i]] <- dens[[i]]$x
         y.dens[[i]] <- dens[[i]]$y
     }
@@ -63,25 +63,25 @@ colDensity <- function(x, xlim = NULL, xlab = "", main = "", ...) {
 
     ## Set color palette
     ang <- seq(0, 240, length.out = n.cols)
-    pal <- hcl(h = ang, c = 100, l = 60, fixup = TRUE)
+    pal <- grDevices::hcl(h = ang, c = 100, l = 60, fixup = TRUE)
 
     if(is.null(xlim))
         xlim <- c(min(x.dens), max(x.dens))
-    
+
     ## Create plot
-    matplot(x.dens, y.dens,
-        type = "l",
-        lty  = 1,
-        xlim = xlim,
-        ylim = c(min(y.dens), max(y.dens)),
-        col  = pal,
-        main = main,
-        ylab = "Density",
-        xlab = xlab,
-        axes = FALSE)
-    axis(2, lwd = 1, lwd.ticks = 1, las = 1, col = "grey50")
-    axis(1, lwd = 1, lwd.ticks = 1, col = "grey50")
-    box(col = "grey50")
+    graphics::matplot(x.dens, y.dens,
+                      type = "l",
+                      lty  = 1,
+                      xlim = xlim,
+                      ylim = c(min(y.dens), max(y.dens)),
+                      col  = pal,
+                      main = main,
+                      ylab = "Density",
+                      xlab = xlab,
+                      axes = FALSE)
+    graphics::axis(2, lwd = 1, lwd.ticks = 1, las = 1, col = "grey50")
+    graphics::axis(1, lwd = 1, lwd.ticks = 1, col = "grey50")
+    graphics::box(col = "grey50")
 
     invisible(list(x = x.dens, y = y.dens))
 }

@@ -12,7 +12,7 @@
 #'
 #' @param coda.object
 #'      An mcmc.list object
-#'  
+#'
 #' @param parameters
 #'      character vector of parameter names to include in graphic. If none are
 #'      supplied all monitored parameters are included.
@@ -24,29 +24,29 @@
 #'
 #' @author Michael Malick
 #'
-#' @seealso \code{\link{xyplot}} 
+#' @seealso \code{\link{xyplot}}
 #'
 #' @examples
 #' library(coda)
 #' data(line)
-#' 
+#'
 #' coda_dotplot(line)
-#' 
+#'
 #' coda_dotplot(line, parameters = "alpha")
-#' 
+#'
 #' coda_dotplot(line, parameters = c("alpha", "beta"))
-#' 
+#'
 #' coda_dotplot(line, parameters = grep("sig", varnames(line), value = TRUE))
-#' 
+#'
 #' coda_dotplot(line, parameters = grep("a", varnames(line), value = TRUE))
-#' 
-#' coda_dotplot(line, parameters = c("alpha", grep("sig", varnames(line), 
+#'
+#' coda_dotplot(line, parameters = c("alpha", grep("sig", varnames(line),
 #'              value = TRUE)))
-#' 
+#'
 coda_dotplot <- function(
     coda.object,
     parameters = NULL) {
-    
+
     parm.p <- coda_table(coda.object, parameters = parameters)
 
     fun.par <- list(
@@ -57,7 +57,7 @@ coda_dotplot <- function(
         axis.text        = list(col = "grey30"),
         reference.line   = list(col = "grey85"))
 
-    xmin <- min(parm.p$"2.5%") 
+    xmin <- min(parm.p$"2.5%")
     xmax <- max(parm.p$"97.5%")
 
     xmin <- xmin - abs(xmax*0.03)
