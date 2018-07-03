@@ -1,8 +1,8 @@
 Package: codatools
 Type: Package
 Title: codatools
-Version: 0.1
-Date: 2015-15-04
+Version: 0.2
+Date: 2018-07-03
 Author: Michael Malick
 Maintainer: Michael Malick <malickmj@gmail.com>
 Depends:
