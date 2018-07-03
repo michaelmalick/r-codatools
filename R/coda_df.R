@@ -46,16 +46,15 @@
 #'               value = TRUE)))
 #' head(df)
 #'
-coda_df <- function(
-    coda.object,
-    parameters = NULL) {
+coda_df <- function(coda.object,
+                    parameters = NULL) {
 
     if (!coda::is.mcmc(coda.object) && !coda::is.mcmc.list(coda.object))
         stop("Not an mcmc or mcmc.list object")
 
-    n.chain   <- coda::nchain(coda.object)
-    mat       <- as.matrix(coda.object, iter = TRUE, chain = TRUE)
-    df        <- as.data.frame(mat)
+    n.chain <- coda::nchain(coda.object)
+    mat     <- as.matrix(coda.object, iter = TRUE, chain = TRUE)
+    df      <- as.data.frame(mat)
 
     if(n.chain == 1)
         df <- data.frame(1, df)

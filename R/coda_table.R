@@ -39,9 +39,8 @@
 #' coda_table(line, parameters = c("alpha", grep("sig", coda::varnames(line),
 #'          value = TRUE)))
 #'
-coda_table <- function(
-    coda.object,
-    parameters = NULL) {
+coda_table <- function(coda.object,
+                       parameters = NULL) {
 
     sim.dat       <- coda_df(coda.object, parameters = parameters)
     sim.dat$chain <- NULL
@@ -49,16 +48,15 @@ coda_table <- function(
     parms         <- names(sim.dat)
     n.parms       <- length(parms)
 
-    ll <- list(
-        mean   = apply(as.matrix(sim.dat), 2, mean),
-        sd     = apply(as.matrix(sim.dat), 2, stats::sd),
-        median = apply(as.matrix(sim.dat), 2, stats::median),
-        p.conf = apply(as.matrix(sim.dat), 2, stats::quantile,
-                       probs = c(0.025, 0.1, 0.9, 0.975)),
-        n.iter = rep(coda::nchain(coda.object) * coda::niter(coda.object),
-                     n.parms),
-        n.eff  = coda::effectiveSize(coda.object)[parms],
-        Rhat   = as.vector(coda::gelman.diag(coda.object)$psrf[,1][parms]))
+    ll <- list(mean   = apply(as.matrix(sim.dat), 2, mean),
+               sd     = apply(as.matrix(sim.dat), 2, stats::sd),
+               median = apply(as.matrix(sim.dat), 2, stats::median),
+               p.conf = apply(as.matrix(sim.dat), 2, stats::quantile,
+                              probs = c(0.025, 0.1, 0.9, 0.975)),
+               n.iter = rep(coda::nchain(coda.object) * coda::niter(coda.object),
+                            n.parms),
+               n.eff  = coda::effectiveSize(coda.object)[parms],
+               Rhat   = as.vector(coda::gelman.diag(coda.object)$psrf[,1][parms]))
     out <- do.call("rbind", ll)
     out <- as.data.frame(t(round(out, 3)))
 

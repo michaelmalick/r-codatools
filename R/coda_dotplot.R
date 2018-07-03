@@ -49,13 +49,12 @@ coda_dotplot <- function(
 
     parm.p <- coda_table(coda.object, parameters = parameters)
 
-    fun.par <- list(
-        strip.background = list(col = c("grey95", "grey85")),
-        strip.shingle    = list(col = c("grey95", "grey85")),
-        strip.border     = list(col = "grey50"),
-        axis.line        = list(col = "grey50"),
-        axis.text        = list(col = "grey30"),
-        reference.line   = list(col = "grey85"))
+    fun.par <- list(strip.background = list(col = c("grey95", "grey85")),
+                    strip.shingle    = list(col = c("grey95", "grey85")),
+                    strip.border     = list(col = "grey50"),
+                    axis.line        = list(col = "grey50"),
+                    axis.text        = list(col = "grey30"),
+                    reference.line   = list(col = "grey85"))
 
     xmin <- min(parm.p$"2.5%")
     xmax <- max(parm.p$"97.5%")
@@ -63,27 +62,31 @@ coda_dotplot <- function(
     xmin <- xmin - abs(xmax*0.03)
     xmax <- xmax + abs(xmax*0.03)
 
-    l <- lattice::xyplot(
-        factor(row.names(parm.p), levels = row.names(parm.p)) ~ parm.p$median,
-        pch  = 19,
-        cex  = 1.0,
-        col  = "steelblue",
-        ylab = "",
-        xlab = "Value",
-        xlim = c(xmin, xmax),
-        par.settings = fun.par,
-        scales = list(tck = c(1, 0)),
-        panel = function(x, y, ...) {
-            lattice::panel.abline(v = 0, col = "grey60", lty = 2)
-            lattice::panel.segments(y0 = 1:dim(parm.p)[1], y1 = 1:dim(parm.p)[1],
-                x0 = parm.p$"2.5%", x1 = parm.p$"97.5%", col = "steelblue",
-                lwd = 1)
-            lattice::panel.segments(y0 = 1:dim(parm.p)[1], y1 = 1:dim(parm.p)[1],
-                x0 = parm.p$"10%", x1 = parm.p$"90%", col = "steelblue",
-                lwd = 2.5)
-            lattice::panel.xyplot(x, y, ...)
-        })
-
+    l <- lattice::xyplot(factor(row.names(parm.p), levels = row.names(parm.p)) ~ parm.p$median,
+                         pch  = 19,
+                         cex  = 1.0,
+                         col  = "steelblue",
+                         ylab = "",
+                         xlab = "Value",
+                         xlim = c(xmin, xmax),
+                         par.settings = fun.par,
+                         scales = list(tck = c(1, 0)),
+                         panel = function(x, y, ...) {
+                             lattice::panel.abline(v = 0, col = "grey60",
+                                                   lty = 2)
+                             lattice::panel.segments(y0 = 1:dim(parm.p)[1],
+                                                     y1 = 1:dim(parm.p)[1],
+                                                     x0 = parm.p$"2.5%",
+                                                     x1 = parm.p$"97.5%",
+                                                     col = "steelblue",
+                                                     lwd = 1)
+                             lattice::panel.segments(y0 = 1:dim(parm.p)[1],
+                                                     y1 = 1:dim(parm.p)[1],
+                                                     x0 = parm.p$"10%",
+                                                     x1 = parm.p$"90%",
+                                                     col = "steelblue",
+                                                     lwd = 2.5)
+                             lattice::panel.xyplot(x, y, ...)
+                         })
     print(l)
-
 }

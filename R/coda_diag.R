@@ -46,11 +46,10 @@
 #' coda_diag(line, parameters = grep("a", varnames(line), value = TRUE))
 #'
 #' coda_diag(line, parameters = c("alpha", grep("sig", varnames(line),
-#'          value = TRUE)))
+#'           value = TRUE)))
 #'
-coda_diag <- function(
-    coda.object,
-    parameters = NULL) {
+coda_diag <- function(coda.object,
+                      parameters = NULL) {
 
     n.chains      <- coda::nchain(coda.object)
     sim.dat       <- coda_df(coda.object, parameters = parameters)
@@ -66,9 +65,8 @@ coda_diag <- function(
     def.par <- graphics::par(no.readonly = TRUE)
     n.parms <- length(parms)
     graphics::par(mar = c(4,4.5,3,0), oma = c(1,0,0,1))
-    m <- rbind(
-        c(1,1),
-        c(2, 3))
+    m <- rbind(c(1,1),
+               c(2, 3))
     graphics::layout(m)
 
     for(i in 1:n.parms) {
@@ -79,18 +77,18 @@ coda_diag <- function(
 
         ## Traceplot
         graphics::matplot(as.vector(stats::time(coda.object)), sim.mat,
-            type = "l",
-            lty  = 1,
-            col  = pal,
-            ylab = "Value",
-            xlab = paste("Iteration (thin = ", coda::thin(coda.object), ")",
-                         sep = ""),
-            axes = FALSE)
+                          type = "l",
+                          lty = 1,
+                          col = pal,
+                          ylab = "Value",
+                          xlab = paste("Iteration (thin = ", coda::thin(coda.object), ")",
+                                       sep = ""),
+                          axes = FALSE)
         graphics::box(col = "grey50")
         graphics::axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
         graphics::axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
         txt <- paste("niter =", coda::niter(coda.object), "   nchain =",
-            coda::nchain(coda.object))
+                     coda::nchain(coda.object))
         graphics::mtext(txt, side = 3, cex = 0.7)
 
 
@@ -157,7 +155,6 @@ coda_diag <- function(
         # graphics::mtext(txt, side = 3, cex = 0.7)
 
 
-
         ## Cumulative Quantiles
         # n.iter <- dim(sim.mat)[1]
         # probs <- c(0.025, 0.50, 0.975)
@@ -166,14 +163,14 @@ coda_diag <- function(
         #     for(k in 1:n.iter)
         #         cum.arr[k , , j] <- quantile(sim.mat[1:k, j], probs = probs)
         # }
-
+        #
         # for(j in 1:n.chains) {
-
+        #
         #     if(j > 1)
         #         add <- TRUE
         #     else
         #         add <- FALSE
-
+        #
         #     matplot(as.vector(time(coda.object)), cum.arr[ , , j],
         #         type = "l",
         #         lwd = c(1, 2, 1),
@@ -185,13 +182,14 @@ coda_diag <- function(
         #         xlab = "Iteration",
         #         add  = add,
         #         axes = FALSE)
-
+        #
         #     if(j == 1) {
         #         box(col = "grey50")
         #         axis(1, lwd = 0, col = "grey50", lwd.ticks = 1)
         #         axis(2, lwd = 0, col = "grey50", las = 1, lwd.ticks = 1)
         #     }
         # }
+
 
         ## Histogram
         # dat.hist <- sim.dat[ , i]
@@ -200,7 +198,7 @@ coda_diag <- function(
         # y.max    <- max(dens$y)
         # x.min    <- min(dens$x)
         # x.max    <- max(dens$x)
-
+        #
         # hist(dat.hist,
         #     freq   = FALSE,
         #     col    = "grey60",

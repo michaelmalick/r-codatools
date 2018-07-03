@@ -41,9 +41,8 @@
 #' coda_hist(line, parameters = c("alpha", grep("sig", varnames(line),
 #'                value = TRUE)))
 #'
-coda_hist <- function(
-    coda.object,
-    parameters = NULL) {
+coda_hist <- function(coda.object,
+                      parameters = NULL) {
 
     n.chains      <- coda::nchain(coda.object)
     sim.dat       <- coda_df(coda.object, parameters = parameters)

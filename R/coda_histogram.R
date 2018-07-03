@@ -42,9 +42,8 @@
 #' coda_histogram(line, parameters = c("alpha", grep("sig", varnames(line),
 #'                value = TRUE)))
 #'
-coda_histogram <- function(
-    coda.object,
-    parameters = NULL) {
+coda_histogram <- function(coda.object,
+                           parameters = NULL) {
 
     dat   <- coda_df(coda.object, parameters = parameters)
     dat.l <- stats::reshape(dat, direction = "long",
@@ -55,13 +54,12 @@ coda_histogram <- function(
     row.names(dat.l) <- NULL
     dat.l$id <- NULL
 
-    fun.par <- list(
-        strip.background = list(col = c("grey95", "grey85")),
-        strip.shingle    = list(col = c("grey95", "grey85")),
-        strip.border     = list(col = "grey50"),
-        axis.line        = list(col = "grey50"),
-        axis.text        = list(col = "grey30"),
-        reference.line   = list(col = "grey85"))
+    fun.par <- list(strip.background = list(col = c("grey95", "grey85")),
+                    strip.shingle    = list(col = c("grey95", "grey85")),
+                    strip.border     = list(col = "grey50"),
+                    axis.line        = list(col = "grey50"),
+                    axis.text        = list(col = "grey30"),
+                    reference.line   = list(col = "grey85"))
 
     dat.l$parm <- factor(dat.l$parm, levels = unique(dat.l$parm))
 
@@ -75,14 +73,16 @@ coda_histogram <- function(
         par.settings = fun.par,
         panel = function(x, ...) {
             lattice::panel.histogram(x, pch = "", col = "grey60",
-                border = "white", type = "density", breaks = NULL)
+                                     border = "white",
+                                     type = "density",
+                                     breaks = NULL)
             lattice::panel.rug(x, col = "grey60")
-            lattice::panel.segments( y0 = 0, y1 = 0,
-                x0 = stats::quantile(x, probs = c(0.025, 0.975))[1],
-                x1 = stats::quantile(x, probs = c(0.025, 0.975))[2],
-                lwd = 3, col = "tomato", lend = 2)
-            lattice::panel.points(x = stats::median(x), y = 0, pch = "|", cex = 3,
-                col = "steelblue")
+            lattice::panel.segments(y0 = 0, y1 = 0,
+                                    x0 = stats::quantile(x, probs = c(0.025, 0.975))[1],
+                                    x1 = stats::quantile(x, probs = c(0.025, 0.975))[2],
+                                    lwd = 3, col = "tomato", lend = 2)
+            lattice::panel.points(x = stats::median(x), y = 0,
+                                  pch = "|", cex = 3, col = "steelblue")
             lattice::panel.densityplot(x, ...)
         })
     print(l)

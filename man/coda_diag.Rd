@@ -45,7 +45,7 @@ coda_diag(line, parameters = grep("sig", varnames(line), value = TRUE))
 coda_diag(line, parameters = grep("a", varnames(line), value = TRUE))
 
 coda_diag(line, parameters = c("alpha", grep("sig", varnames(line),
-         value = TRUE)))
+          value = TRUE)))
 
 }
 \seealso{

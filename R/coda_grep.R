@@ -44,11 +44,9 @@
 #' dim(x)
 #' head(x)
 #'
-coda_grep <- function(
-    coda.object,
-    pattern,
-    return.matrix = FALSE,
-    ...) {
+coda_grep <- function(coda.object,
+                      pattern,
+                      return.matrix = FALSE, ...) {
 
     if (!coda::is.mcmc(coda.object) && !coda::is.mcmc.list(coda.object))
         stop("Not an mcmc or mcmc.list object")
