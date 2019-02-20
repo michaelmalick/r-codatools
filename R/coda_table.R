@@ -13,6 +13,9 @@
 #'      character vector of parameter names to include in table. If none are
 #'      supplied all monitored parameters are included.
 #'
+#' @param quantiles
+#'      vector of probability quantiles to compute
+#'
 #' @return
 #'      A dataframe
 #'
@@ -28,6 +31,8 @@
 #'
 #' coda_table(line)
 #'
+#' coda_table(line, quantiles = c(0.05, 0.95))
+#'
 #' coda_table(line, parameters = "alpha")
 #'
 #' coda_table(line, parameters = c("alpha", "beta"))
@@ -37,10 +42,11 @@
 #' coda_table(line, parameters = grep("a", coda::varnames(line), value = TRUE))
 #'
 #' coda_table(line, parameters = c("alpha", grep("sig", coda::varnames(line),
-#'          value = TRUE)))
+#'            value = TRUE)))
 #'
 coda_table <- function(coda.object,
-                       parameters = NULL) {
+                       parameters = NULL,
+                       quantiles = c(0.025, 0.1, 0.9, 0.975)) {
 
     sim.dat       <- coda_df(coda.object, parameters = parameters)
     sim.dat$chain <- NULL
@@ -52,7 +58,7 @@ coda_table <- function(coda.object,
                sd     = apply(as.matrix(sim.dat), 2, stats::sd),
                median = apply(as.matrix(sim.dat), 2, stats::median),
                p.conf = apply(as.matrix(sim.dat), 2, stats::quantile,
-                              probs = c(0.025, 0.1, 0.9, 0.975)),
+                              probs = quantiles),
                n.iter = rep(coda::nchain(coda.object) * coda::niter(coda.object),
                             n.parms),
                n.eff  = coda::effectiveSize(coda.object)[parms],
