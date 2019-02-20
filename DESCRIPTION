@@ -1,10 +1,11 @@
 Package: codatools
 Type: Package
 Title: codatools
-Version: 0.2
-Date: 2018-07-03
+Version: 0.3
+Date: 2019-02-20
 Author: Michael Malick
 Maintainer: Michael Malick <malickmj@gmail.com>
+Encoding: UTF-8
 Depends:
     R (>= 3.0)
 Imports:
@@ -12,4 +13,4 @@ Imports:
     lattice
 Description: An R package to extend the usefulness of CODA MCMC diagnostics.
 License: file LICENSE
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
