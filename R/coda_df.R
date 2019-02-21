@@ -52,14 +52,11 @@ coda_df <- function(coda.object,
     if (!coda::is.mcmc(coda.object) && !coda::is.mcmc.list(coda.object))
         stop("Not an mcmc or mcmc.list object")
 
-    n.chain <- coda::nchain(coda.object)
     mat     <- as.matrix(coda.object, iter = TRUE, chain = TRUE)
     df      <- as.data.frame(mat)
 
-    if(n.chain == 1)
-        df <- data.frame(1, df)
-
-    names(df) <- c("chain", "iter", coda::varnames(coda.object))
+    names(df)[names(df) == "CHAIN"] <- "chain"
+    names(df)[names(df) == "ITER"]  <- "iter"
 
     if(is.null(parameters))
         out.df <- df
