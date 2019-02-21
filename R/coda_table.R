@@ -13,6 +13,10 @@
 #'      character vector of parameter names to include in table. If none are
 #'      supplied all monitored parameters are included.
 #'
+#' @param gelman.diag
+#'      logical, should Rhat be computed for each parameter, if TRUE input
+#'      `coda.object` should have more than one chain.
+#'
 #' @param quantiles
 #'      vector of probability quantiles to compute
 #'
@@ -46,6 +50,7 @@
 #'
 coda_table <- function(coda.object,
                        parameters = NULL,
+                       gelman.diag = TRUE,
                        quantiles = c(0.025, 0.1, 0.9, 0.975)) {
 
     sim.dat       <- coda_df(coda.object, parameters = parameters)
@@ -61,8 +66,11 @@ coda_table <- function(coda.object,
                               probs = quantiles),
                n.iter = rep(coda::nchain(coda.object) * coda::niter(coda.object),
                             n.parms),
-               n.eff  = coda::effectiveSize(coda.object)[parms],
-               Rhat   = as.vector(coda::gelman.diag(coda.object)$psrf[,1][parms]))
+               n.eff  = coda::effectiveSize(coda.object)[parms])
+
+    if(gelman.diag) {
+        ll$Rhat <- as.vector(coda::gelman.diag(coda.object)$psrf[,1][parms])
+    }
     out <- do.call("rbind", ll)
     out <- as.data.frame(t(round(out, 3)))
 

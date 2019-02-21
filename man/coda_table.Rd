@@ -4,14 +4,17 @@
 \alias{coda_table}
 \title{Create a summary table of an mcmc.list object}
 \usage{
-coda_table(coda.object, parameters = NULL, quantiles = c(0.025, 0.1,
-  0.9, 0.975))
+coda_table(coda.object, parameters = NULL, gelman.diag = TRUE,
+  quantiles = c(0.025, 0.1, 0.9, 0.975))
 }
 \arguments{
 \item{coda.object}{an mcmc.list object}
 
 \item{parameters}{character vector of parameter names to include in table. If none are
 supplied all monitored parameters are included.}
+
+\item{gelman.diag}{logical, should Rhat be computed for each parameter, if TRUE input
+`coda.object` should have more than one chain.}
 
 \item{quantiles}{vector of probability quantiles to compute}
 }
@@ -41,7 +44,7 @@ coda_table(line, parameters = grep("sig", coda::varnames(line), value = TRUE))
 coda_table(line, parameters = grep("a", coda::varnames(line), value = TRUE))
 
 coda_table(line, parameters = c("alpha", grep("sig", coda::varnames(line),
-         value = TRUE)))
+           value = TRUE)))
 
 }
 \seealso{
