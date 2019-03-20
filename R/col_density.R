@@ -20,7 +20,7 @@
 #'      logical, should a plot be created
 #'
 #' @param \dots
-#'      additional argurments passed to \code{density}
+#'      additional arguments passed to \code{density}
 #'
 #' @return
 #'      Invisibly returns a list with x and y components for the plotted density
@@ -33,14 +33,14 @@
 #' @author Michael Malick
 #'
 #' @examples
-#' mat <- matrix(rnorm(100000), ncol = 100)
-#' colDensity(mat)
-#' colDensity(mat, main = "test")
-#' colDensity(mat, xlim = c(-4, 3))
-#' xx <- colDensity(mat, xlim = c(-4, 3))
-#' class(xx)
-#'
-colDensity <- function(x, xlim = NULL, xlab = "", main = "", plot.it = TRUE, ...) {
+#'  mat <- matrix(rnorm(100000), ncol = 100)
+#'  col_density(mat)
+#'  col_density(mat, main = "test")
+#'  col_density(mat, xlim = c(-4, 3))
+#'  xx <- col_density(mat, xlim = c(-4, 3))
+#'  class(xx)
+
+col_density <- function(x, xlim = NULL, xlab = "", main = "", plot.it = TRUE, ...) {
 
     if (!is.matrix(x))
         stop("x is not a matrix")
@@ -90,3 +90,5 @@ colDensity <- function(x, xlim = NULL, xlab = "", main = "", plot.it = TRUE, ...
 
     invisible(list(x = x.dens, y = y.dens))
 }
+
+colDensity <- col_density  ## backwards compatibility
