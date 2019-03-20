@@ -19,8 +19,7 @@
 #'     \itemize{
 #'         \item{traceplot of all chains}
 #'         \item{density plot of marginal distribution for each chain}
-#'         \item{autocorrelation for each chain with effective sample size
-#'               (ess)}
+#'         \item{autocorrelation for each chain}
 #'      }
 #'
 #' @seealso \code{\link{traceplot}} \code{\link{density}}
