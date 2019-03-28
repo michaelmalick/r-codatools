@@ -4,12 +4,12 @@
 \alias{coda_neff}
 \title{Create effective sample size diagnostic graphic}
 \usage{
-coda_neff(coda.object, plot = TRUE, thresh = 0.5, cex.labels = 0.5)
+coda_neff(neff, samps, thresh = 0.5, cex.labels = 0.5)
 }
 \arguments{
-\item{coda.object}{an mcmc.list object}
+\item{neff}{named vector of Neff values}
 
-\item{plot}{logical, should a plot be printed}
+\item{samps}{total number of MCMC draws (N chains * N draws)}
 
 \item{thresh}{threshold used to flag parameters with low effective sample sizes, as a
 percentage of total MCMC draws}
@@ -18,20 +18,21 @@ percentage of total MCMC draws}
 }
 \value{
 Invisibly returns a vector of the effective sample size for each
-     parameter sorted from lowest (first) to highest (last). Optionally
+     parameter sorted from lowest (first) to highest (last) and
      prints a plot of the effective sample sizes.
 }
 \description{
-\code{coda_neff} creates a graphic of the effective sample size for each
-     parameter in the input object. The left-hand y-axis is the total
-     effective size and the right-hand y-axis is the effective size
-     scaled by the total number of MCMC draws.
+\code{coda_neff} creates a graphic of the effective sample size.
+     The left-hand y-axis is the total effective size and the right-hand
+     y-axis is the effective size scaled by the total number of MCMC draws.
 }
 \examples{
 library(coda)
 data(line)
 
-coda_neff(line)
+neff  <- coda::effectiveSize(line)
+samps <- coda::niter(line) * coda::nchain(line)
+coda_neff(neff, samps)
 }
 \seealso{
 \code{\link{effectiveSize}}

@@ -4,12 +4,10 @@
 \alias{coda_rhat}
 \title{Create Rhat diagnostic graphic}
 \usage{
-coda_rhat(coda.object, plot = TRUE, thresh = 1.01, cex.labels = 0.5)
+coda_rhat(rhat, thresh = 1.01, cex.labels = 0.5)
 }
 \arguments{
-\item{coda.object}{an mcmc.list object}
-
-\item{plot}{logical, should a plot be printed}
+\item{rhat}{named vector of Rhat values}
 
 \item{thresh}{threshold used to flag low Rhat values}
 
@@ -17,18 +15,20 @@ coda_rhat(coda.object, plot = TRUE, thresh = 1.01, cex.labels = 0.5)
 }
 \value{
 Invisibly returns a vector of the Rhat values for each
-     parameter sorted from highest (first) to lowest (last). Optionally
-     prints a plot of the effective sample sizes.
+     parameter sorted from highest (first) to lowest (last)
+     and prints a plot of the effective sample sizes.
 }
 \description{
 \code{coda_rhat} creates a graphic of the potential scale reduction
-     factor (Rhat) for each parameter in the input
+     factor (Rhat)
 }
 \examples{
 library(coda)
 data(line)
 
-coda_rhat(line)
+gd <- coda::gelman.diag(line)
+rhat <- gd$psrf[ , 1]
+coda_rhat(rhat)
 }
 \seealso{
 \code{\link{gelman.diag}}
