@@ -1,8 +1,8 @@
 Package: codatools
 Type: Package
 Title: codatools
-Version: 0.3
-Date: 2019-02-20
+Version: 0.4
+Date: 2019-03-29
 Author: Michael Malick
 Maintainer: Michael Malick <malickmj@gmail.com>
 Encoding: UTF-8
